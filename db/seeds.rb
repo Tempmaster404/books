@@ -5,3 +5,36 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+Category.destroy_all
+
+7.times do |obj|
+  category = Category.new
+  category.title = Faker::Book.genre
+  category.save
+end
+
+Author.destroy_all
+
+15.times do |obj|
+  author = Author.new
+  author.name = Faker::Book.author
+  author.save
+end
+
+Book.destroy_all
+  
+30.times do |obj|
+  book = Book.new
+  offset_author = rand(Author.count)
+  rand_author = Author.offset(offset_author).first
+  book.authors << rand_author
+  book.title = Faker::Book.title 
+  book.description = Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4)
+  offset_category = rand(Category.count)
+  rand_category = Category.offset(offset_category).first
+  book.category_id = rand_category.id
+  book.save
+end
+

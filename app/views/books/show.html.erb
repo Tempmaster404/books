@@ -1,0 +1,5 @@
+<%= @book.title %>
+<%= @book.description %>
+<% @book.authors.each do |author| %>
+  <%= author.name %>
+<% end %>
