@@ -10,31 +10,33 @@ require 'faker'
 Category.destroy_all
 
 7.times do |obj|
-  category = Category.new
-  category.title = Faker::Book.genre
-  category.save
+  Category.create(title: Faker::Book.genre)
 end
 
 Author.destroy_all
 
 15.times do |obj|
-  author = Author.new
-  author.name = Faker::Book.author
-  author.save
+  Author.create(name: Faker::Book.author)
 end
 
 Book.destroy_all
+Cover.destroy_all
   
 30.times do |obj|
-  book = Book.new
+  book = Book.new(title: Faker::Book.title)
+  book.description = Faker::Lorem.paragraph(
+    sentence_count: 2, supplemental: false, random_sentences_to_add: 4
+  )
+
   offset_author = rand(Author.count)
   rand_author = Author.offset(offset_author).first
   book.authors << rand_author
-  book.title = Faker::Book.title 
-  book.description = Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4)
+ 
   offset_category = rand(Category.count)
   rand_category = Category.offset(offset_category).first
   book.category_id = rand_category.id
+  
   book.save
+  book.create_cover(image: File.open(File.join(Rails.root, 'app/assets/images/book.jpeg')))
 end
 
