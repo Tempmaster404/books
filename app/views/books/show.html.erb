@@ -1,6 +1,11 @@
-<%= image_tag @book.cover.image.url, class: "" %>
-<%= @book.title %>
-<%= @book.description %>
-<% @book.authors.each do |author| %>
-  <%= author.name %>
-<% end %>
+<div class="text-center"> 
+  <h3><%= @book.title %></h3>
+  <%= image_tag @book.cover.image.url, class: "img img-thumbnail" %>
+  <br>
+  <p>Description: </p>
+  <%= @book.description %>
+  <br>
+  <p>Authors: <% @book.authors.each do |author| %>
+    <%= author.name %>
+  <% end %></p>
+</div>

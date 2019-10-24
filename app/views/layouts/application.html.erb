@@ -9,7 +9,12 @@
   </head>
 
   <body>
-  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <% categories.each do |category| %>
+        <%= link_to category.title, category, class: "navbar-brand" %>
+      <% end %>
+    </nav>
+
     <%= yield %>
   </body>
 </html>
