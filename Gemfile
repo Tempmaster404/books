@@ -60,5 +60,10 @@ gem "paperclip", "~> 5.1"
 gem 'activeadmin'
 gem 'devise'
 gem 'cancancan'
+gem 'aws-sdk', '~> 2'
+
+group :development, :test do
+  gem 'rspec-rails'
+end
 
 ruby "2.5.1"
